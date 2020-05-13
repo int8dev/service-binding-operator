@@ -12,7 +12,6 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/client-go/dynamic"
-	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
 	"github.com/redhat-developer/service-binding-operator/pkg/apis/apps/v1alpha1"
@@ -45,7 +44,6 @@ type ServiceBinderOptions struct {
 	DynClient              dynamic.Interface
 	DetectBindingResources bool
 	SBR                    *v1alpha1.ServiceBindingRequest
-	Client                 client.Client
 	Objects                []*unstructured.Unstructured
 	EnvVars                map[string][]byte
 	EnvVarPrefix           string
@@ -67,10 +65,6 @@ func (o *ServiceBinderOptions) Valid() error {
 
 	if o.DynClient == nil {
 		return ErrInvalidServiceBinderOptions("DynClient")
-	}
-
-	if o.Client == nil {
-		return ErrInvalidServiceBinderOptions("Client")
 	}
 
 	if o.Binding == nil {
@@ -339,7 +333,6 @@ func BuildServiceBinder(
 	// consider renaming to ResourceBinder
 	binder := NewBinder(
 		ctx,
-		options.Client,
 		options.DynClient,
 		options.SBR,
 		options.Binding.VolumeKeys,

@@ -400,7 +400,6 @@ func TestServiceBinder_Bind(t *testing.T) {
 			DynClient:              f.FakeDynClient(),
 			DetectBindingResources: false,
 			SBR:                    sbrSingleService,
-			Client:                 f.FakeClient(),
 			Binding: &Binding{
 				EnvVars:    map[string][]byte{},
 				VolumeKeys: []string{},
@@ -437,7 +436,6 @@ func TestServiceBinder_Bind(t *testing.T) {
 			DynClient:              f.FakeDynClient(),
 			DetectBindingResources: false,
 			SBR:                    sbrSingleServiceWithCustomEnvVar,
-			Client:                 f.FakeClient(),
 			Binding: &Binding{
 				EnvVars: map[string][]byte{
 					"MY_DB_NAME": []byte("db1"),
@@ -479,7 +477,6 @@ func TestServiceBinder_Bind(t *testing.T) {
 			DynClient:              f.FakeDynClient(),
 			DetectBindingResources: true,
 			SBR:                    sbrSingleService,
-			Client:                 f.FakeClient(),
 			Binding: &Binding{
 				EnvVars:    map[string][]byte{},
 				VolumeKeys: []string{},
@@ -499,7 +496,6 @@ func TestServiceBinder_Bind(t *testing.T) {
 			DynClient:              f.FakeDynClient(),
 			DetectBindingResources: true,
 			SBR:                    sbrEmptyAppSelector,
-			Client:                 f.FakeClient(),
 			Binding: &Binding{
 				EnvVars:    map[string][]byte{},
 				VolumeKeys: []string{},
@@ -523,7 +519,6 @@ func TestServiceBinder_Bind(t *testing.T) {
 			DynClient:              f.FakeDynClient(),
 			DetectBindingResources: false,
 			SBR:                    nil,
-			Client:                 f.FakeClient(),
 		},
 		wantBuildErr: ErrInvalidServiceBinderOptions("SBR"),
 	}))
@@ -534,7 +529,6 @@ func TestServiceBinder_Bind(t *testing.T) {
 			DynClient:              f.FakeDynClient(),
 			DetectBindingResources: false,
 			SBR:                    sbrMultipleServices,
-			Client:                 f.FakeClient(),
 			Binding: &Binding{
 				EnvVars:    map[string][]byte{},
 				VolumeKeys: []string{},
